@@ -13,10 +13,17 @@ def read_raw_frames(raw_dir: str):
 def write_parquet(df: pd.DataFrame, out_path: Path, partition_cols=None):
     out_path.mkdir(parents=True, exist_ok=True)
     if partition_cols:
-        df.to_parquet(out_path, index=False, partition_cols=partition_cols)
+        import pyarrow as pa
+        import pyarrow.parquet as pq
+        table = pa.Table.from_pandas(df)
+        pq.write_to_dataset(
+            table,
+            root_path=str(out_path),
+            partition_cols=partition_cols,
+            use_dictionary=True
+        )
     else:
-        (out_path / "data.parquet").parent.mkdir(parents=True, exist_ok=True)
-        df.to_parquet(out_path, index=False)
+        df.to_parquet(out_path / "data.parquet", index=False)
 
 def write_outputs(
     base_out: str,

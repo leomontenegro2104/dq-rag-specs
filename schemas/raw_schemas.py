@@ -1,6 +1,5 @@
 import pandera as pa
 from pandera import Column, DataFrameSchema, Check
-from pandera.typing import Series
 
 ProductsRawSchema = DataFrameSchema({
     "product_id": Column(pa.Int64, nullable=True),
@@ -24,7 +23,7 @@ VendorsRawSchema = DataFrameSchema({
 InventoryRawSchema = DataFrameSchema({
     "product_id": Column(pa.Int64, nullable=False),
     "warehouse": Column(pa.String, nullable=False),
-    "on_hand": Column(pa.Int64, Check.ge(0), nullable=False),  # intentionally relaxed, will check manually for quarantine
+    "on_hand": Column(pa.Int64, nullable=False),
     "min_stock": Column(pa.Int64, Check.ge(0), nullable=False),
     "last_counted_at": Column(pa.DateTime, nullable=False),
 }, coerce=True)

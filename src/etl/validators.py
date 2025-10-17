@@ -8,5 +8,4 @@ def validate_raw_vendors(df: pd.DataFrame) -> pd.DataFrame:
     return VendorsRawSchema.validate(df, lazy=True)
 
 def validate_raw_inventory(df: pd.DataFrame) -> pd.DataFrame:
-    # Allow reading; additional quarantine will be done in transform
     return InventoryRawSchema.validate(df, lazy=True)

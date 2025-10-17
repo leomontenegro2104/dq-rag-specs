@@ -25,7 +25,7 @@ def _parse_date(s):
             return pd.to_datetime(datetime.strptime(str(s).strip(), fmt))
         except Exception:
             continue
-    return None  # invalid → quarantine
+    return None
 
 def _parse_dimensions(s):
     if pd.isna(s): return None
@@ -36,16 +36,13 @@ def _parse_dimensions(s):
 
 def _gen_product_id_from_sku(sku: str) -> int:
     h = hashlib.sha1(sku.encode()).hexdigest()
-    return int(h[:12], 16)  # truncated
+    return int(h[:12], 16)
 
 def build_dim_vendor(vendors: pd.DataFrame):
-    # Resolve duplicates by vendor_code:
-    # rule: preferred name = longest; primary email = first by corporate domain appearance order.
     def choose_name(group):
         return group.loc[group["name"].str.len().idxmax(), "name"]
 
     def choose_email(group):
-        # preference for vendor's own domain (simple heuristic)
         preferred = group["support_email"].iloc[0]
         return preferred
 
@@ -58,7 +55,6 @@ def build_dim_vendor(vendors: pd.DataFrame):
     ).reset_index(drop=True)
 
     dim_vendor = DimVendorSchema.validate(agg, lazy=True)
-    # map for normalization (if enrichment was needed)
     vendor_map = dim_vendor.set_index("vendor_code").to_dict(orient="index")
     return dim_vendor, vendor_map
 
@@ -95,7 +91,6 @@ def build_dim_product(products: pd.DataFrame, vendor_map: dict):
             quarantine.append({**r.to_dict(), "reason": "invalid_msrp"})
             continue
 
-        # invalid date is allowed as None (policy: don't break, but don't impute)
         L, W, H = dims
         if not vcode:
             quarantine.append({**r.to_dict(), "reason": "vendor_code_missing"})
@@ -120,7 +115,6 @@ def build_dim_product(products: pd.DataFrame, vendor_map: dict):
     return dim_product, q_prod
 
 def build_fact_inventory(inventory: pd.DataFrame, dim_product: pd.DataFrame):
-    # quarantine for on_hand < 0 and missing FK
     quarantine = []
     valid = []
     valid_ids = set(dim_product["product_id"].tolist())

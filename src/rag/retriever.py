@@ -29,8 +29,6 @@ def answer_question(rag: RAGIndex, question: str):
     hits = rag.search(question, k=5)
     if not hits or hits[0]["score"] < 0.2:
         return {"answer": "não encontrado", "sources": hits[:3]}
-    # Build a simple deterministic answer (no LLM to keep low cost)
-    # Heuristic: return the best snippet as "short summary".
     best = hits[0]
     return {
         "answer": best["snippet"],
