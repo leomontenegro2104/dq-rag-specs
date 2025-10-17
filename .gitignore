@@ -186,7 +186,6 @@ Thumbs.db
 .ruff_cache/
 
 # Data files (you might want to keep some data files in git)
-*.csv
 *.parquet
 *.pkl
 *.pickle

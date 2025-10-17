@@ -15,6 +15,9 @@ fmt:
 test:
 	pytest -q
 
+gen-inventory:
+	$(PY) scripts/gen_inventory.py
+
 run-etl:
 	$(PY) -m src.etl.run --raw-dir raw --out-dir data
 
