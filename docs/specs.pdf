@@ -1,0 +1,123 @@
+%PDF-1.4
+1 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+
+2 0 obj
+<<
+/Type /Pages
+/Kids [3 0 R]
+/Count 1
+>>
+endobj
+
+3 0 obj
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [0 0 612 792]
+/Resources <<
+/Font <<
+/F1 4 0 R
+>>
+>>
+/Contents 5 0 R
+>>
+endobj
+
+4 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+endobj
+
+5 0 obj
+<<
+/Length 2000
+>>
+stream
+BT
+/F1 12 Tf
+50 750 Td
+(Alpha-X Pro Router Specifications) Tj
+0 -20 Td
+(Product Overview) Tj
+0 -15 Td
+(The Alpha-X Pro is a high-performance enterprise router designed) Tj
+0 -15 Td
+(for demanding network environments.) Tj
+0 -30 Td
+(Interfaces) Tj
+0 -15 Td
+(- 4x RJ-45 Gigabit Ethernet ports) Tj
+0 -15 Td
+(- 2x SFP ports for fiber connectivity) Tj
+0 -15 Td
+(- 1x Console port and Management port) Tj
+0 -15 Td
+(- 1x USB 2.0 port for firmware updates) Tj
+0 -30 Td
+(Power Consumption) Tj
+0 -15 Td
+(- Maximum power consumption: 18 W) Tj
+0 -15 Td
+(- Typical power consumption: 12 W idle) Tj
+0 -15 Td
+(- Input voltage: 100-240V AC, 50-60Hz) Tj
+0 -30 Td
+(Operating Environment) Tj
+0 -15 Td
+(- Operating temperature: 0-40°C) Tj
+0 -15 Td
+(- Storage temperature: -20-60°C) Tj
+0 -15 Td
+(- Operating humidity: 10-85% RH non-condensing) Tj
+0 -15 Td
+(- Operating altitude: Up to 3,000 meters) Tj
+0 -30 Td
+(Firmware Updates) Tj
+0 -15 Td
+(- Web-based management interface recommended) Tj
+0 -15 Td
+(- USB flash drive via front panel USB port) Tj
+0 -15 Td
+(- TFTP server upload via network) Tj
+0 -15 Td
+(- All updates require complete system reboot) Tj
+0 -15 Td
+(- Update process takes 3-5 minutes) Tj
+0 -30 Td
+(Certifications and Compliance) Tj
+0 -15 Td
+(- CE marking for European markets) Tj
+0 -15 Td
+(- FCC Part 15 Class B) Tj
+0 -15 Td
+(- RoHS compliant) Tj
+0 -15 Td
+(- UL Listed and CSA approved) Tj
+ET
+endstream
+endobj
+
+xref
+0 6
+0000000000 65535 f 
+0000000010 00000 n 
+0000000079 00000 n 
+0000000173 00000 n 
+0000000301 00000 n 
+0000000380 00000 n 
+trailer
+<<
+/Size 6
+/Root 1 0 R
+>>
+startxref
+2435
+%%EOF

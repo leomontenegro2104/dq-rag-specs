@@ -1,0 +1,49 @@
+Alpha-X Pro Router Specifications
+
+Product Overview
+The Alpha-X Pro is a high-performance enterprise router designed for demanding network environments. This document provides detailed technical specifications and operational requirements.
+
+Interfaces
+The Alpha-X Pro features multiple connectivity options:
+- 4x RJ-45 Gigabit Ethernet ports (10/100/1000 Mbps)
+- 2x SFP (Small Form-factor Pluggable) ports for fiber connectivity
+- 1x Console port (RJ-45)
+- 1x Management port (10/100 Mbps)
+- 1x USB 2.0 port for firmware updates
+
+All Ethernet ports support auto-negotiation and auto-crossover (Auto-MDIX).
+
+Power Consumption
+Power requirements and consumption specifications:
+- Maximum power consumption: 18 W
+- Typical power consumption: 12 W (idle)
+- Input voltage: 100-240V AC, 50-60Hz
+- Power adapter included: External 24V DC, 1A
+- Power over Ethernet (PoE) support: No
+
+Operating Environment
+Environmental specifications for deployment:
+- Operating temperature range: 0°C to 40°C (32°F to 104°F)
+- Storage temperature range: -20°C to 60°C (-4°F to 140°F)
+- Operating humidity: 10% to 85% RH (non-condensing)
+- Storage humidity: 5% to 95% RH (non-condensing)
+- Operating altitude: Up to 3,000 meters (9,843 feet)
+
+Firmware Updates
+The Alpha-X Pro supports multiple firmware update methods:
+- Web-based management interface (recommended)
+- USB flash drive via front panel USB port
+- TFTP server upload via network
+- Factory reset capabilities available
+
+Important: All firmware updates require a complete system reboot. Update process typically takes 3-5 minutes. Do not power off the device during firmware update process.
+
+Certifications and Compliance
+The Alpha-X Pro meets the following regulatory standards:
+- CE (Conformité Européenne) marking for European markets
+- FCC (Federal Communications Commission) Part 15 Class B
+- IC (Industry Canada) ICES-003 Class B
+- RoHS (Restriction of Hazardous Substances) compliant
+- WEEE (Waste Electrical and Electronic Equipment) compliant
+
+Safety certifications include UL Listed and CSA approved ratings for North American deployment.
