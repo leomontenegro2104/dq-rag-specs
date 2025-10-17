@@ -1,0 +1,6 @@
+[
+  {
+    "question": "Sample question for RAG evaluation",
+    "expected_answer": "Sample expected answer"
+  }
+]

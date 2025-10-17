@@ -1,0 +1,1 @@
+# Document ingestion: chunk + embed + index
