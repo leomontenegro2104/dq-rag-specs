@@ -1,6 +1,32 @@
 [
   {
-    "question": "Sample question for RAG evaluation",
-    "expected_answer": "Sample expected answer"
+    "question": "What is the operating temperature range?",
+    "expected_keywords": ["0°C", "40°C", "operating temperature"],
+    "expected_answer": "0°C to 40°C"
+  },
+  {
+    "question": "How much power does the Alpha-X Pro consume?",
+    "expected_keywords": ["18 W", "power consumption", "maximum"],
+    "expected_answer": "Maximum 18W"
+  },
+  {
+    "question": "What interfaces are available?",
+    "expected_keywords": ["RJ-45", "Gigabit", "SFP", "4x", "2x"],
+    "expected_answer": "4x RJ-45 Gigabit and 2x SFP ports"
+  },
+  {
+    "question": "How do I update the firmware?",
+    "expected_keywords": ["Web", "USB", "firmware update", "reboot"],
+    "expected_answer": "Via Web UI or USB, requires reboot"
+  },
+  {
+    "question": "What certifications does it have?",
+    "expected_keywords": ["CE", "FCC", "certification"],
+    "expected_answer": "CE and FCC certifications"
+  },
+  {
+    "question": "What is the storage temperature range?",
+    "expected_keywords": ["-20°C", "60°C", "storage"],
+    "expected_answer": "-20°C to 60°C"
   }
 ]
