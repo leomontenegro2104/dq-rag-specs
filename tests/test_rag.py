@@ -1,9 +1,10 @@
 from fastapi.testclient import TestClient
-from src.rag.api import app
+from src.rag.simple_api import app, _startup
 
 def test_ask_smoke():
+    _startup()
     c = TestClient(app)
-    r = c.post("/ask", json={"question":"temperatura operacional"})
+    r = c.post("/ask", json={"question":"router specifications"})
     assert r.status_code == 200
     data = r.json()
     assert "answer" in data and "sources" in data
