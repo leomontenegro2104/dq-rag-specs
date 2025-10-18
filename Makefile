@@ -13,7 +13,7 @@ fmt:
 	black .
 
 test:
-	pytest -q
+	PYTHONPATH=. $(PY) -m pytest tests/ -v
 
 gen-inventory:
 	$(PY) scripts/gen_inventory.py
