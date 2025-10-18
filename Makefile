@@ -1,5 +1,5 @@
-PY=python
-PIP=python -m pip
+PY=/usr/bin/python3
+PIP=/usr/bin/python3 -m pip
 
 setup:
 	$(PIP) install -U pip
