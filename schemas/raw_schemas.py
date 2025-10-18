@@ -2,15 +2,15 @@ import pandera as pa
 from pandera import Column, DataFrameSchema, Check
 
 ProductsRawSchema = DataFrameSchema({
-    "product_id": Column(pa.Int64, nullable=True),
+    "product_id": Column(pa.Float, nullable=True),
     "sku": Column(pa.String, nullable=False),
     "model": Column(pa.String, nullable=True),
     "category": Column(pa.String, nullable=True),
-    "weight_grams": Column(pa.Float, nullable=True),
+    "weight_grams": Column(pa.Int, nullable=True),
     "dimensions_mm": Column(pa.String, nullable=True),
     "vendor_code": Column(pa.String, nullable=True),
     "launch_date": Column(pa.String, nullable=True),
-    "msrp_usd": Column(pa.String, nullable=True),
+    "msrp_usd": Column(pa.Float, nullable=True),
 })
 
 VendorsRawSchema = DataFrameSchema({

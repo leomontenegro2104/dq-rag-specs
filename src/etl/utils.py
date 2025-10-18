@@ -5,7 +5,7 @@ from pathlib import Path
 
 def read_raw_frames(raw_dir: str):
     raw = Path(raw_dir)
-    products = pd.read_csv(raw / "products.csv")
+    products = pd.read_csv(raw / "products.csv", on_bad_lines='skip', engine='python')
     vendors = pd.read_json(raw / "vendors.jsonl", lines=True)
     inventory = pd.read_parquet(raw / "inventory.parquet")
     return {"products": products, "vendors": vendors, "inventory": inventory}
