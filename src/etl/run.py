@@ -3,6 +3,7 @@ from .utils import read_raw_frames, write_outputs
 from .validators import validate_raw_products, validate_raw_vendors, validate_raw_inventory
 from .transform import build_dim_product, build_dim_vendor, build_fact_inventory
 
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--raw-dir", default="raw")
@@ -19,6 +20,7 @@ def main():
     fact_inventory, q_inv = build_fact_inventory(i, dim_product)
 
     write_outputs(args.out_dir, dim_vendor, dim_product, fact_inventory, q_prod, q_inv)
+
 
 if __name__ == "__main__":
     main()

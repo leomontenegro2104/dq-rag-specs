@@ -1,29 +1,28 @@
 import pandas as pd
-import pyarrow as pa
-import pyarrow.parquet as pq
 from pathlib import Path
+
 
 def read_raw_frames(raw_dir: str):
     raw = Path(raw_dir)
-    products = pd.read_csv(raw / "products.csv", on_bad_lines='skip', engine='python')
+    products = pd.read_csv(raw / "products.csv", on_bad_lines="skip", engine="python")
     vendors = pd.read_json(raw / "vendors.jsonl", lines=True)
     inventory = pd.read_parquet(raw / "inventory.parquet")
     return {"products": products, "vendors": vendors, "inventory": inventory}
+
 
 def write_parquet(df: pd.DataFrame, out_path: Path, partition_cols=None):
     out_path.mkdir(parents=True, exist_ok=True)
     if partition_cols:
         import pyarrow as pa
         import pyarrow.parquet as pq
+
         table = pa.Table.from_pandas(df)
         pq.write_to_dataset(
-            table,
-            root_path=str(out_path),
-            partition_cols=partition_cols,
-            use_dictionary=True
+            table, root_path=str(out_path), partition_cols=partition_cols, use_dictionary=True
         )
     else:
         df.to_parquet(out_path / "data.parquet", index=False)
+
 
 def write_outputs(
     base_out: str,

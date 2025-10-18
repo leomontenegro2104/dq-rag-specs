@@ -13,3 +13,18 @@ dev = ["pytest>=6.0,<8.0", "ruff>=0.0.280,<0.6", "black>=22.0,<25.0", "mypy>=0.9
 
 [tool.ruff]
 line-length = 100
+
+[tool.black]
+line-length = 100
+target-version = ['py38']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.venv
+  | build
+  | dist
+)/
+'''
