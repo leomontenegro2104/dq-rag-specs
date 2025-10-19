@@ -5,7 +5,7 @@ requires-python = ">=3.8"
 dependencies = [
   "pandas>=1.5,<2.1", "pyarrow>=10.0,<15.0", "pandera>=0.14,<0.18",
   "pydantic>=1.10,<2.0", "fastapi>=0.100,<0.110", "uvicorn[standard]>=0.20,<0.25",
-  "pypdf>=3.0,<4.0", "faiss-cpu>=1.7,<1.8", "sentence-transformers>=2.2,<3.0",
+  "pypdf>=3.0,<4.0", "faiss-cpu>=1.7,<1.8",
   "python-dotenv>=0.19"
 ]
 [project.optional-dependencies]

@@ -1,7 +1,6 @@
 from pathlib import Path
 from typing import List, Dict
 from pypdf import PdfReader
-from sentence_transformers import SentenceTransformer
 import faiss
 import numpy as np
 import json
@@ -34,32 +33,45 @@ def read_pdf_chunks(pdf_path: str):
     return chunks, meta
 
 
-def build_index(chunks: List[str], model_name="sentence-transformers/all-MiniLM-L6-v2"):
-    model = SentenceTransformer(model_name)
-    embs = model.encode(chunks, convert_to_numpy=True, normalize_embeddings=True)
-    dim = embs.shape[1]
-    index = faiss.IndexFlatIP(dim)
-    index.add(embs.astype(np.float32))
-    return index, embs
+def build_lightweight_index(chunks: List[str]):
+    # Create a dummy index for compatibility
+    # The actual search will be keyword-based in retriever
+    dim = 1  # Minimal dimension
+    index = faiss.IndexFlatL2(dim)
+    
+    # Add dummy vectors for each chunk
+    vectors = np.ones((len(chunks), dim), dtype=np.float32)
+    index.add(vectors)
+    
+    print(f"✅ Built lightweight index with {len(chunks)} chunks")
+    return index
 
 
 def save_index(out_dir: str, index, chunks: List[str], meta: List[Dict]):
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
+    
     faiss.write_index(index, str(out / "faiss.index"))
     (out / "chunks.json").write_text(json.dumps(chunks, ensure_ascii=False))
     (out / "meta.json").write_text(json.dumps(meta, ensure_ascii=False))
+    
+    print(f"✅ Saved index to {out_dir}")
 
 
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--pdf", required=True)
-    ap.add_argument("--out", default="data/rag/index")
+    ap = argparse.ArgumentParser(description="Ingest PDF documents for RAG")
+    ap.add_argument("--pdf", required=True, help="Path to PDF file")
+    ap.add_argument("--out", default="data/rag/index", help="Output directory")
     args = ap.parse_args()
 
+    print(f"📄 Processing PDF: {args.pdf}")
     chunks, meta = read_pdf_chunks(args.pdf)
-    index, _ = build_index(chunks)
+    
+    print(f"📝 Extracted {len(chunks)} text chunks")
+    index = build_lightweight_index(chunks)
+    
     save_index(args.out, index, chunks, meta)
+    print("🎉 Document ingestion complete!")
 
 
 if __name__ == "__main__":

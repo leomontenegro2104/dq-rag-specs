@@ -1,8 +1,7 @@
 from pathlib import Path
 import json
 import faiss
-import numpy as np
-from sentence_transformers import SentenceTransformer
+import faiss
 
 
 class RAGIndex:
@@ -11,18 +10,31 @@ class RAGIndex:
         self.index = faiss.read_index(str(p / "faiss.index"))
         self.chunks = json.loads((p / "chunks.json").read_text())
         self.meta = json.loads((p / "meta.json").read_text())
-        self.model = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+        print(f"✅ Loaded index with {len(self.chunks)} chunks")
 
     def search(self, query: str, k: int = 5):
-        q = self.model.encode([query], convert_to_numpy=True, normalize_embeddings=True).astype(
-            np.float32
-        )
-        distances, indices = self.index.search(q, k)
+        query_lower = query.lower()
+        scores = []
+
+        for i, chunk in enumerate(self.chunks):
+            chunk_lower = chunk.lower()
+            words = query_lower.split()
+            score = sum(1 for word in words if word in chunk_lower) / len(words)
+            scores.append((score, i))
+
+        scores.sort(reverse=True)
+
         hits = []
-        for score, idx in zip(distances[0], indices[0]):
-            ch = self.chunks[int(idx)]
-            m = self.meta[int(idx)]
-            hits.append({"score": float(score), "snippet": ch[:360], "page": m["page"]})
+        for score, idx in scores[:k]:
+            if score > 0:
+                chunk = self.chunks[idx]
+                meta = self.meta[idx]
+                hits.append({
+                    "score": float(score),
+                    "snippet": chunk[:360],
+                    "page": meta.get("page", 1)
+                })
+
         return hits
 
 
@@ -32,7 +44,17 @@ def load_index(path: str) -> RAGIndex:
 
 def answer_question(rag: RAGIndex, question: str):
     hits = rag.search(question, k=5)
-    if not hits or hits[0]["score"] < 0.2:
-        return {"answer": "não encontrado", "sources": hits[:3]}
-    best = hits[0]
-    return {"answer": best["snippet"], "sources": hits[:3]}
+    if not hits or hits[0]["score"] < 0.1:
+        return {"answer": "No relevant information found", "sources": []}
+
+    context = " | ".join([h["snippet"] for h in hits[:3]])
+    return {
+        "answer": f"Based on the documentation: {context}",
+        "sources": hits
+    }
+
+
+if __name__ == "__main__":
+    rag = load_index("data/rag/index")
+    result = answer_question(rag, "What are the router specifications?")
+    print("Test result:", result)

@@ -1,5 +1,5 @@
 from fastapi.testclient import TestClient
-from src.rag.simple_api import app, _startup
+from src.rag.api import app, _startup
 
 
 def test_ask_smoke():
