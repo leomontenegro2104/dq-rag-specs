@@ -1,7 +1,6 @@
 from pathlib import Path
 import json
 import faiss
-import faiss
 
 
 class RAGIndex:
@@ -29,11 +28,13 @@ class RAGIndex:
             if score > 0:
                 chunk = self.chunks[idx]
                 meta = self.meta[idx]
-                hits.append({
-                    "score": float(score),
-                    "snippet": chunk[:360],
-                    "page": meta.get("page", 1)
-                })
+                hits.append(
+                    {
+                        "score": float(score),
+                        "snippet": chunk[:360],  # 360 characters preview
+                        "page": meta.get("page", 1),
+                    }
+                )
 
         return hits
 
@@ -48,10 +49,7 @@ def answer_question(rag: RAGIndex, question: str):
         return {"answer": "No relevant information found", "sources": []}
 
     context = " | ".join([h["snippet"] for h in hits[:3]])
-    return {
-        "answer": f"Based on the documentation: {context}",
-        "sources": hits
-    }
+    return {"answer": f"Based on the documentation: {context}", "sources": hits}
 
 
 if __name__ == "__main__":

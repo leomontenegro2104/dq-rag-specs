@@ -12,7 +12,7 @@ This project implements an end-to-end data quality pipeline with RAG capabilitie
 - **Quarantine Strategy**: Isolate bad records rather than failing entire batches
 - **Parsing Flexibility**: Support multiple date/decimal formats common in real-world data
 
-### RAG Architecture 
+### RAG Architecture
 - **FAISS IndexFlatIP**: CPU-optimized inner product similarity search
 - **Sentence-Transformers all-MiniLM-L6-v2**: Lightweight (80MB) multilingual embeddings
 - **Deterministic Responses**: Return best snippet directly (no LLM inference costs)
@@ -47,7 +47,7 @@ This project implements an end-to-end data quality pipeline with RAG capabilitie
 - **FK Validation**: Monitor foreign key constraint failures
 - **Processing Time**: Measure pipeline execution for scaling planning
 
-### RAG System  
+### RAG System
 - **Retrieval Quality**: Score distribution and relevance thresholds
 - **Response Time**: Query processing latency (target: <500ms)
 - **Index Size**: Storage requirements vs document volume
@@ -62,7 +62,7 @@ This project implements an end-to-end data quality pipeline with RAG capabilitie
 
 ### Medium Term (1-2 months)
 1. **Semantic Chunking**: Replace fixed-size with content-aware segmentation
-2. **Multi-Document Support**: Handle document collections and cross-references  
+2. **Multi-Document Support**: Handle document collections and cross-references
 3. **Incremental Indexing**: Support document updates without full reindex
 4. **Advanced Evaluation**: RAGAS metrics for retrieval quality assessment
 

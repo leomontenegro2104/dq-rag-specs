@@ -95,7 +95,7 @@ curl -X POST http://localhost:8000/ask \
 
 **Products (`raw/products.csv`)**:
 - **Missing SKU**: → quarantine (reason: "sku_missing")
-- **Invalid weight**: ≤ 0 or non-numeric → quarantine (reason: "invalid_weight")  
+- **Invalid weight**: ≤ 0 or non-numeric → quarantine (reason: "invalid_weight")
 - **Incomplete dimensions**: Missing L×W×H → quarantine (reason: "dimensions_incomplete")
 - **Invalid MSRP**: < 0 or non-numeric → quarantine (reason: "invalid_msrp")
 - **Missing vendor_code**: → quarantine (reason: "vendor_code_missing")

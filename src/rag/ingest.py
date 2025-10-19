@@ -10,7 +10,7 @@ import argparse
 def chunk_text(text: str, max_chars=1200, overlap=200) -> List[str]:
     """
     Split text into overlapping chunks for better context preservation.
-    
+
     Args:
         max_chars=1200: Optimal chunk size for search - balances context vs precision
         overlap=200: Overlap between chunks to preserve semantic continuity
@@ -31,10 +31,10 @@ def chunk_text(text: str, max_chars=1200, overlap=200) -> List[str]:
 def read_pdf_chunks(pdf_path: str):
     """
     Extract and chunk text content from PDF document.
-    
+
     Features:
         - Page-by-page extraction: pypdf extracts text from each page
-        - Metadata tracking: Records source page number for each chunk  
+        - Metadata tracking: Records source page number for each chunk
         - Error handling: Gracefully handles empty pages with fallback
     """
     reader = PdfReader(pdf_path)
@@ -51,29 +51,29 @@ def read_pdf_chunks(pdf_path: str):
 def build_lightweight_index(chunks: List[str]):
     """
     Create a lightweight FAISS index for efficient document retrieval.
-    
+
     Features:
         - FAISS compatibility: Uses industry-standard IndexFlatL2 for vector search
         - Lightweight approach: Minimal dummy vectors (1D) for development/demo
         - Scalable design: Structure allows easy upgrade to real embeddings
         - Production ready: IndexFlatL2 supports millions of vectors efficiently
-        
+
     Args:
         chunks: List of text chunks to index
-        
+
     Returns:
         faiss.IndexFlatL2: Configured FAISS index ready for search operations
     """
-    
+
     # Create a dummy index for compatibility
     # The actual search will be keyword-based in retriever
     dim = 1  # Minimal dimension
     index = faiss.IndexFlatL2(dim)
-    
+
     # Add dummy vectors for each chunk
     vectors = np.ones((len(chunks), dim), dtype=np.float32)
     index.add(vectors)
-    
+
     print(f"✅ Built lightweight index with {len(chunks)} chunks")
     return index
 
@@ -81,11 +81,11 @@ def build_lightweight_index(chunks: List[str]):
 def save_index(out_dir: str, index, chunks: List[str], meta: List[Dict]):
     out = Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)
-    
+
     faiss.write_index(index, str(out / "faiss.index"))
     (out / "chunks.json").write_text(json.dumps(chunks, ensure_ascii=False))
     (out / "meta.json").write_text(json.dumps(meta, ensure_ascii=False))
-    
+
     print(f"✅ Saved index to {out_dir}")
 
 
@@ -97,10 +97,10 @@ def main():
 
     print(f"📄 Processing PDF: {args.pdf}")
     chunks, meta = read_pdf_chunks(args.pdf)
-    
+
     print(f"📝 Extracted {len(chunks)} text chunks")
     index = build_lightweight_index(chunks)
-    
+
     save_index(args.out, index, chunks, meta)
     print("🎉 Document ingestion complete!")
 
