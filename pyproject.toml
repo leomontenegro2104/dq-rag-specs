@@ -1,9 +1,9 @@
 [project]
 name = "dq-rag-specs"
 version = "0.1.0"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
-  "pandas>=1.5,<2.1", "pyarrow>=10.0,<15.0", "pandera>=0.14,<0.18",
+  "pandas>=1.5,<2.4", "pyarrow>=10.0,<15.0", "pandera>=0.14,<0.18",
   "pydantic>=1.10,<2.0", "fastapi>=0.100,<0.110", "uvicorn[standard]>=0.20,<0.25",
   "pypdf>=3.0,<4.0", "faiss-cpu>=1.7,<1.8",
   "python-dotenv>=0.19"
@@ -16,7 +16,7 @@ line-length = 100
 
 [tool.black]
 line-length = 100
-target-version = ['py38']
+target-version = ['py311']
 include = '\.pyi?$'
 extend-exclude = '''
 /(

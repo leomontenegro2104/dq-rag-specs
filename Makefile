@@ -1,5 +1,5 @@
-PY=python3.10
-PIP=python3.10 -m pip
+PY=python3.11
+PIP=python3.11 -m pip
 
 setup:
 	$(PIP) install -U pip
