@@ -12,6 +12,9 @@ lint:
 fmt:
 	black .
 
+pre-commit:
+	pre-commit run --all-files
+
 test:
 	PYTHONPATH=. $(PY) -m pytest tests/ -v
 
