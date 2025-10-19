@@ -1,7 +1,7 @@
 [project]
 name = "dq-rag-specs"
 version = "0.1.0"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 dependencies = [
   "pandas>=1.5,<2.1", "pyarrow>=10.0,<15.0", "pandera>=0.14,<0.18",
   "pydantic>=1.10,<2.0", "fastapi>=0.100,<0.110", "uvicorn[standard]>=0.20,<0.25",
